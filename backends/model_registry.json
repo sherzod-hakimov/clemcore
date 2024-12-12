@@ -447,6 +447,16 @@
       "open_weight": false,
       "parameters": "8B"
   },
+    {
+      "model_name": "gemini-2.0-flash-exp",
+      "model_id": "gemini-2.0-flash-exp",
+      "backend": "google",
+      "supports_images": true,
+      "support_multiple_images": true,
+      "release_date": "2024-12-11",
+      "open_weight": false,
+      "parameters": ""
+  },
   {
       "model_name": "luminous-supreme-control",
       "model_id": "luminous-supreme-control",
