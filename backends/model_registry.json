@@ -1258,6 +1258,17 @@
       "parameters": "8B"
   },
   {
+      "model_name": "Llama-3.3-70B-Instruct",
+      "backend": "huggingface_local",
+      "requires_api_key": true,
+      "huggingface_id": "meta-llama/Llama-3.3-70B-Instruct",
+      "premade_chat_template": true,
+      "eos_to_cull": "<\\|eot_id\\|>",
+      "release_date": "2024-12-06",
+      "open_weight": true,
+      "parameters": "70B"
+  },
+  {
       "model_name": "Sky-T1-32B-Preview",
       "backend": "huggingface_local",
       "huggingface_id": "NovaSky-AI/Sky-T1-32B-Preview",
