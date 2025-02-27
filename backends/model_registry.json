@@ -162,7 +162,7 @@
       "release_date": "2024-12-17",
       "open_weight": false,
       "parameters": "",
-      "o1_model": true
+      "reasoning_model": true
   },
   {
       "model_name": "o1-preview-2024-09-12",
@@ -171,7 +171,7 @@
       "release_date": "2024-09-12",
       "open_weight": false,
       "parameters": "",
-      "o1_model": true
+      "reasoning_model": true
   },
   {
       "model_name": "o1-mini-2024-09-12",
@@ -180,7 +180,16 @@
       "release_date": "2024-09-12",
       "open_weight": false,
       "parameters": "",
-      "o1_model": true
+      "reasoning_model": true
+  },
+  {
+    "model_name": "o3-mini-2025-01-31",
+    "model_id": "o3-mini-2025-01-31",
+    "backend": "openai",
+    "release_date": "2025-01-31",
+    "open_weight": false,
+    "parameters": "",
+    "reasoning_model": true
   },
   {
       "model_name": "gpt-3.5-turbo-0125",
@@ -398,6 +407,18 @@
       "estimated_parameters": ""
   },
   {
+      "model_name": "claude-3-7-sonnet-20250219",
+      "model_id": "claude-3-7-sonnet-20250219",
+      "backend": "anthropic",
+      "supports_images": true,
+      "support_multiple_images": true,
+      "thinking_mode": true,
+      "release_date": "2025-02-19",
+      "open_weight": false,
+      "parameters": "",
+      "estimated_parameters": ""
+  },
+  {
       "model_name": "gemini-1.0-pro-001",
       "model_id": "gemini-1.0-pro-001",
       "backend": "google",
@@ -485,6 +506,16 @@
       "supports_images": true,
       "support_multiple_images": true,
       "release_date": "2024-12-11",
+      "open_weight": false,
+      "parameters": ""
+  },
+  {
+      "model_name": "gemini-2.0-flash-thinking-exp",
+      "model_id": "gemini-2.0-flash-thinking-exp",
+      "backend": "google",
+      "supports_images": true,
+      "support_multiple_images": true,
+      "release_date": "2025-02-01",
       "open_weight": false,
       "parameters": ""
   },
