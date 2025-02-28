@@ -32,12 +32,38 @@
       "parameters": "70B"
   },
   {
-      "model_name": "Llama-3-8B-Together.ai",
-      "model_id": "meta-llama/Llama-3-8b-chat-hf",
+      "model_name": "mistral-large-2411",
+      "model_id": "mistralai/mistral-large-2411",
       "backend": "openai_compatible",
-      "release_date": "2024-04-18",
+      "release_date": "2024-11-01",
+      "open_weight": false,
+      "parameters": ""
+  },
+  {
+    
+    "model_name": "deepseek-v3",
+      "model_id": "deepseek/deepseek-chat",
+      "backend": "openai_compatible",
+      "release_date": "2024-12-01",
       "open_weight": true,
-      "parameters": "8B"
+      "parameters": "671B"
+  },
+  {
+    
+    "model_name": "deepseek-r1",
+      "model_id": "deepseek/deepseek-r1",
+      "backend": "openai_compatible",
+      "release_date": "2025-01-20",
+      "open_weight": true,
+      "parameters": "671B"
+  },
+  {
+    "model_name": "qwen-max",
+      "model_id": "qwen/qwen-max",
+      "backend": "openai_compatible",
+      "release_date": "2025-02-01",
+      "open_weight": false,
+      "parameters": ""
   },
   {
       "model_name": "Llama-3-8B-Instruct-Anyscale",
