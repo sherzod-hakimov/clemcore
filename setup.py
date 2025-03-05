@@ -47,7 +47,7 @@ setup(
     },
     include_package_data=True,
     package_data={
-        "clembench": [
+        "clemcore": [
             "clemcore/utils/logging.yaml",
             "clemcore/utils/chat-two-tracks.css",
             "clemcore/backends/model_registry.json"
