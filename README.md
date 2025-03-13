@@ -63,7 +63,7 @@ A workspace may look like this.
 (optional) game_registry.json 
 (optional) model_registry.json  
 (optional) custom_api.py 
-clemgames/
+clembench/
 ```
 
 The files have the following functions:
@@ -79,7 +79,7 @@ To be discoverable, directories have to carry a `clemgame.json` (here a game pat
 ## Use Case: Benchmarker
 
 As a benchmarker you want to run multiple models for all games that constitute the benchmark.
-Therefore, you will checkout the `clemgames` repository into a new workspace directory.
+Therefore, you will checkout the [clembench](https://github.com/clp-research/clembench) repository into a new workspace directory.
 You will add the `key.json` to the workspace to access the backends.
 In addition, you might need to add additional model entries that are not yet packaged to a `model_registry.json`.
 Then you will run via the cli `clem run -g all -m model1` etc. or potentially use a batch script.
@@ -88,7 +88,7 @@ Hence, a benchmarkers workspace directory might look as follows:
 
 ```
 myworkspace
-- clemgames/
+- clembench/
 - results/
 - key.json 
 - model_registry.json  
@@ -97,7 +97,7 @@ myworkspace
 ## Use Case: Game Developer
 
 As a game developer you want to implement your own game to be run with `clem`.
-You will use a typical clembench game project structure.
+You will use a typical clem game project structure.
 The game directory will become your workspace.
 To make the game visible to `clem` you need to add a `clemgame.json` to the directory.
 This file should specify at least the following
@@ -131,7 +131,7 @@ mygame
 ## Use Case: Model Developer
 
 As a model developer you want to test the performance of your custom model on the benchmark.
-For this you will checkout the `clemgames` repository into your workspace directory.
+For this you will checkout the [clembench](https://github.com/clp-research/clembench) repository into your workspace directory.
 In addition, you want to make your custom model available via the `model_registry.json`.
 The entry should at least specify a name and a backend, e.g., `{"model_name":"mymodel", "backend":"mybackend"}`. 
 The important thing to consider is that `clem` will try to locate all additional backend files in the workspace.
@@ -143,7 +143,7 @@ Hence, a model developers workspace might look as follows:
 
 ```
 myworkspace
-- clemgames/
+- clembench/
 - results/
 - model_registry.json
 - mybackend_api.py  
@@ -163,4 +163,4 @@ However, the following documentation needs still to be checked for up-to-datenes
 - [How to add and run your own game](docs/howto_add_games.md)
 - [How to integrate with Slurk](docs/howto_slurk.md)
 
-This repository is tested on `Python 3.10+`
+This repository is tested on `Python 3.10`
