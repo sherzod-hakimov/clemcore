@@ -1,5 +1,5 @@
 ### Updates
-(March 2025): Version 2.0 of the benchmark has been released (see <https://clembench.github.io/> ). And some major refactorings are underway and will be released very soon. (Preview: The framework will become pip-installable, and the games that make the benchmark will get their own repo. (In fact, the code used for running 2.0 already lives in a separate repo: <https://github.com/clp-research/clemgames> .) Everything will become easier. Hopefully.)
+(March 2025): Version 2.0 of the benchmark has been [released](https://clembench.github.io/). And the framework is now pip installable. The games that make the benchmark got their own [repository](https://github.com/clp-research/clembench).
 
 (February 2024): We have updated the framework code. If you have written games using the initial release version, see [this guide](docs/howto_update_to_v1.md) on how to update your game.
 
@@ -18,7 +18,7 @@ On the [main project website](https://clembench.github.io) , under [leaderboard]
 
 ### Game details
 
-see [games repository](https://github.com/clp-research/clemgames)
+see [clembench repository](https://github.com/clp-research/clembench)
 - A Simple Word Game: [taboo](docs/taboo.md)
 - A Word-Guessing Game Based on Clues: [wordle](docs/wordle.md)
 - Drawing Instruction Giving and Following: [image](docs/image.md)
@@ -32,7 +32,7 @@ This means that there is no need to checkout the repository, but you can simply 
 ```
 (myclem) pip install clemcore
 ```
-(However, clemcore developers should checkout this repository and install from within the directory `pip install . -e`) 
+(However, clemcore developers should checkout this repository and install from within the directory `pip install -e .`) 
 
 Note that we highly recommend to perform the installation in a distinct virtual python environment, because there might be a lot of dependencies necessary depending on your use case.
 Additional install options are:
@@ -71,7 +71,7 @@ The files have the following functions:
 - **game_registry.json**: allows to make additional game specifications useable for the runs. The game specifications must at least contain the `game_name`, `game_path` and `players` attribute. 
 - **model_registry.json**: allows to add additional model specifications. This is specifically useful to run with models that have not been packaged yet. In addition, it allows to point model specification to custom backend names.
 - **custom_api.py**: `clem` automatically discovers additional _api files placed into the cwd, so that users of the framework can run their own backends with the games.
-- **clemgames/**: contains the game directories (with the game code) available for the benchmark runs
+- **clembench/**: contains the game directories (with the game code) available for the benchmark runs
 
 Note that, `clem` does now automatically discovers game directories that are at most 3-levels away from the `cwd`. 
 To be discoverable, directories have to carry a `clemgame.json` (here a game path is not required, because `clem` automatically determines it).
