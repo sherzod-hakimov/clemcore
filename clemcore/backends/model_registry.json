@@ -305,7 +305,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "1.76T",
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -377,7 +376,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "200B",
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -449,7 +447,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "200B",
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -521,7 +518,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "8B",
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -572,7 +568,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "1.76T"
         }
     },
     {
@@ -617,7 +612,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "1.76T"
         }
     },
     {
@@ -662,7 +656,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "1.76T"
         }
     },
     {
@@ -728,7 +721,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "o1_model": true
+            "reasoning_model": true
         }
     },
     {
@@ -794,7 +787,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "o1_model": true
+            "reasoning_model": true
         }
     },
     {
@@ -860,7 +853,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "o1_model": true
+            "reasoning_model": true
         }
     },
     {
@@ -938,7 +931,6 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "175B"
         }
     },
     {
@@ -983,7 +975,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "1.76T"
+
         }
     },
     {
@@ -1028,7 +1020,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "1.76T"
+
         }
     },
     {
@@ -1073,7 +1065,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "175B"
+
         }
     },
     {
@@ -1118,7 +1110,7 @@
             "url": "https://openai.com/policies/row-terms-of-use/"
         },
         "model_config": {
-            "estimated_parameters": "175B"
+
         }
     },
     {
@@ -1141,7 +1133,7 @@
             "url": "https://mistral.ai/licenses/MRL-0.1.md"
         },
         "model_config": {
-            "estimated_parameters": "141B"
+
         }
     },
     {
@@ -1164,7 +1156,7 @@
             "url": "https://mistral.ai/licenses/MRL-0.1.md"
         },
         "model_config": {
-            "estimated_parameters": "7B"
+
         }
     },
     {
@@ -1187,7 +1179,7 @@
             "url": "https://mistral.ai/licenses/MRL-0.1.md"
         },
         "model_config": {
-            "estimated_parameters": "46.7B"
+
         }
     },
     {
@@ -1227,7 +1219,7 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         },
         "model_config": {
-            "estimated_parameters": ""
+
         }
     },
     {
@@ -1280,7 +1272,7 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         },
         "model_config": {
-            "estimated_parameters": ""
+
         }
     },
     {
@@ -1299,7 +1291,7 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         },
         "model_config": {
-            "estimated_parameters": ""
+
         }
     },
     {
@@ -1318,7 +1310,7 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         },
         "model_config": {
-            "estimated_parameters": ""
+
         }
     },
     {
@@ -1337,7 +1329,7 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         },
         "model_config": {
-            "estimated_parameters": ""
+
         }
     },
     {
@@ -1373,7 +1365,7 @@
             "url": "https://www.anthropic.com/legal/commercial-terms"
         },
         "model_config": {
-            "estimated_parameters": "137B"
+
         }
     },
     {
@@ -1400,8 +1392,8 @@
                 "multiple_images": true,
                 "audio": false,
                 "video": false
-            },
-            "estimated_parameters": "2T"
+            }
+
         }
     },
     {
@@ -1428,8 +1420,8 @@
                 "multiple_images": true,
                 "audio": false,
                 "video": false
-            },
-            "estimated_parameters": "70B"
+            }
+
         }
     },
     {
@@ -1456,8 +1448,8 @@
                 "multiple_images": true,
                 "audio": false,
                 "video": false
-            },
-            "estimated_parameters": "20B"
+            }
+
         }
     },
     {
@@ -1479,7 +1471,7 @@
             "url": "https://www.anthropic.com/legal/commercial-terms"
         },
         "model_config": {
-            "estimated_parameters": "",
+
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -1507,7 +1499,7 @@
             "url": "https://www.anthropic.com/legal/commercial-terms"
         },
         "model_config": {
-            "estimated_parameters": "",
+
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -1535,7 +1527,7 @@
             "url": "https://www.anthropic.com/legal/commercial-terms"
         },
         "model_config": {
-            "estimated_parameters": "",
+
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -1563,10 +1555,12 @@
             "url": "https://www.anthropic.com/legal/commercial-terms"
         },
         "model_config": {
-            "single_image": true,
-            "multiple_images": true,
-            "audio": false,
-            "video": false,
+            "multimodality": {
+                "single_image": true,
+                "multiple_images": true,
+                "audio": false,
+                "video": false
+            },
             "thinking_mode": true
         }
     },
@@ -1825,7 +1819,7 @@
             "url": "https://ai.google.dev/gemini-api/terms"
         },
         "model_config": {
-            "estimated_parameters": "",
+
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -2108,7 +2102,7 @@
             "url": "https://ai.google.dev/gemini-api/terms"
         },
         "model_config": {
-            "estimated_parameters": "",
+
             "multimodality": {
                 "single_image": true,
                 "multiple_images": true,
@@ -2216,100 +2210,6 @@
         "model_id": "gemini-2.0-flash-exp",
         "backend": "google",
         "release_date": "2024-12-11",
-        "open_weight": false,
-        "parameters": "",
-        "languages": [
-            "af",
-            "am",
-            "as",
-            "az",
-            "be",
-            "bs",
-            "ca",
-            "ceb",
-            "co",
-            "cy",
-            "dv",
-            "eo",
-            "eu",
-            "fa",
-            "fil",
-            "fy",
-            "ga",
-            "gd",
-            "gl",
-            "gu",
-            "ha",
-            "haw",
-            "hmn",
-            "ht",
-            "hy",
-            "ig",
-            "is",
-            "jv",
-            "ka",
-            "kk",
-            "km",
-            "kn",
-            "kri",
-            "ku",
-            "ky",
-            "la",
-            "lb",
-            "lo",
-            "mg",
-            "mi",
-            "mk",
-            "ml",
-            "mn",
-            "mni-Mtei",
-            "mr",
-            "ms",
-            "mt",
-            "my",
-            "ne",
-            "ny",
-            "or",
-            "pa",
-            "ps",
-            "sd",
-            "si",
-            "sm",
-            "sn",
-            "so",
-            "sq",
-            "st",
-            "su",
-            "ta",
-            "te",
-            "tg",
-            "ug",
-            "ur",
-            "uz",
-            "xh",
-            "yi",
-            "yo",
-            "zu"
-        ],
-        "context_size": "1000k",
-        "license": {
-            "name": "Gemini",
-            "url": "https://ai.google.dev/gemini-api/terms"
-        },
-        "model_config": {
-            "multimodality": {
-                "single_image": true,
-                "multiple_images": true,
-                "audio": true,
-                "video": true
-            }
-        }
-    },
-    {
-        "model_name": "gemini-2.0-flash-thinking-exp",
-        "model_id": "gemini-2.0-flash-thinking-exp",
-        "backend": "google",
-        "release_date": "2025-02-01",
         "open_weight": false,
         "parameters": "",
         "languages": [
