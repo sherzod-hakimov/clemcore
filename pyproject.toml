@@ -42,7 +42,7 @@ dependencies = [
 
 [project.optional-dependencies]
 vllm = [
-    "transformers>=5.3.4", # keep in sync with huggingface extra; installs torch
+    "transformers>=5.3.0", # keep in sync with huggingface extra; installs torch
     "vllm>=0.8.4,<1.0.0" # should use transformers as installed above
 ]
 huggingface = [
@@ -50,7 +50,7 @@ huggingface = [
     "bitsandbytes>=0.42.0,<1.0.0", # for loading models with 4-bit and 8-bit quantization
     "peft>=0.17.0,<1.0.0", # for loading LoRA models (adapters)
     "timm>=1.0.19,<1.1.0", # for transformers
-    "transformers>=5.3.4", # installs torch
+    "transformers>=5.3.0", # installs torch
     "torchvision", # version resolved by torch
 ]
 slurk = [
