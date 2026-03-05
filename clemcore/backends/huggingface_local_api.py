@@ -19,6 +19,30 @@ logger = logging.getLogger(__name__)
 stdout_logger = logging.getLogger("clemcore.cli")
 
 FALLBACK_CONTEXT_SIZE = 256
+_MAX_TOKENIZER_CONTEXT_GUARD = 1_000_000  # guard against very large sentinel values
+
+
+def _parse_context_size(value: Any) -> int | None:
+    """Parse context size from model registry values like 8192 or '128k'."""
+    if value is None:
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        text = value.strip().lower()
+        if not text:
+            return None
+        match = re.fullmatch(r"(\\d+)([km])?", text)
+        if not match:
+            return None
+        number = int(match.group(1))
+        suffix = match.group(2)
+        if suffix == "k":
+            return number * 1024
+        if suffix == "m":
+            return number * 1024 * 1024
+        return number
+    return None
 
 
 def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTrainedTokenizerBase, AutoConfig, int]:
@@ -101,7 +125,20 @@ def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTraine
     elif hasattr(auto_config, 'n_positions'):  # some models may have their context size under this attribute
         context_size = auto_config.n_positions
     else:  # few models, especially older ones, might not have their context size in the config
-        context_size = FALLBACK_CONTEXT_SIZE
+        # Try the model registry entry if present (e.g., "256k")
+        try:
+            registry_context = model_spec["context_size"]
+        except Exception:
+            registry_context = None
+        context_size = _parse_context_size(registry_context)
+        # Fall back to tokenizer metadata when it looks sane
+        if context_size is None:
+            tokenizer_max = getattr(tokenizer, "model_max_length", None)
+            if isinstance(tokenizer_max, int) and tokenizer_max < _MAX_TOKENIZER_CONTEXT_GUARD:
+                context_size = tokenizer_max
+        # Last resort
+        if context_size is None:
+            context_size = FALLBACK_CONTEXT_SIZE
 
     # Decoder-only models (e.g., GPT, LLaMA) often don't define a pad token explicitly,
     # since they use causal attention over the entire left-context during generation.
