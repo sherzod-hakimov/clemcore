@@ -32,26 +32,24 @@ def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTraine
     """
     logger.info(f'Loading huggingface model config and tokenizer: {model_spec.model_name}')
 
+    model_config = _get_model_config(model_spec)
+
     use_api_key = False
     api_key = None
-    if 'requires_api_key' in model_spec.model_config:
-        if model_spec['model_config']['requires_api_key']:
+    if model_config.get("requires_api_key"):
+        if model_config["requires_api_key"]:
             # load HF API key:
             key = KeyRegistry.from_json().get_key_for("huggingface")
             api_key = key["api_key"]
             use_api_key = True
-        else:
-            requires_api_key_info = (f"{model_spec['model_name']} registry setting has requires_api_key, "
-                                     f"but it is not 'true'. Please check the model entry.")
-            print(requires_api_key_info)
-            logger.info(requires_api_key_info)
 
     hf_model_str = model_spec['huggingface_id']
 
     # use 'slow' tokenizer for models that require it:
-    if 'slow_tokenizer' in model_spec.model_config:
-        if model_spec['model_config']['slow_tokenizer']:
-            tokenizer: PreTrainedTokenizerBase = AutoTokenizer.from_pretrained(
+    if "slow_tokenizer" in model_config:
+        if model_config["slow_tokenizer"]:
+            tokenizer: PreTrainedTokenizerBase = _from_pretrained_with_dtype(
+                AutoTokenizer.from_pretrained,
                 hf_model_str,
                 device_map="auto",
                 torch_dtype="auto",
@@ -65,7 +63,8 @@ def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTraine
             print(slow_tokenizer_info)
             logger.info(slow_tokenizer_info)
     elif use_api_key:
-        tokenizer: PreTrainedTokenizerBase = AutoTokenizer.from_pretrained(
+        tokenizer: PreTrainedTokenizerBase = _from_pretrained_with_dtype(
+            AutoTokenizer.from_pretrained,
             hf_model_str,
             token=api_key,
             device_map="auto",
@@ -73,7 +72,8 @@ def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTraine
             verbose=False
         )
     else:
-        tokenizer: PreTrainedTokenizerBase = AutoTokenizer.from_pretrained(
+        tokenizer: PreTrainedTokenizerBase = _from_pretrained_with_dtype(
+            AutoTokenizer.from_pretrained,
             hf_model_str,
             device_map="auto",
             torch_dtype="auto",
@@ -81,9 +81,9 @@ def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTraine
         )
 
     # apply proper chat template:
-    if not model_spec['model_config']['premade_chat_template']:
-        if 'custom_chat_template' in model_spec.model_config:
-            tokenizer.chat_template = model_spec['model_config']['custom_chat_template']
+    if not model_config.get("premade_chat_template", False):
+        if 'custom_chat_template' in model_config:
+            tokenizer.chat_template = model_config["custom_chat_template"]
         else:
             logger.info(
                 f"No custom chat template for {model_spec.model_name} found in model settings from model registry "
@@ -114,7 +114,7 @@ def load_config_and_tokenizer(model_spec: backends.ModelSpec) -> Tuple[PreTraine
     # especially decoder-only models where left-padding is needed for correct generation.
     # We first check for an explicit setting in `model_config`, and fall back to
     # automatic detection based on the model architecture.
-    padding_side = model_spec.model_config.get("padding_side", None)
+    padding_side = model_config.get("padding_side", None)
     if padding_side is None:
         stdout_logger.warning("No 'padding_side' configured in 'model_config' for %s", model_spec.model_name)
         is_encoder_decoder = getattr(auto_config, 'is_encoder_decoder', False)
@@ -159,28 +159,55 @@ def load_model(model_spec: backends.ModelSpec) -> PreTrainedModel | PeftModel:
     """
     logger.info(f'Start loading huggingface model weights: {model_spec.model_name}')
 
+    model_config = _get_model_config(model_spec)
     model_args = dict(device_map="auto", torch_dtype="auto")
-    if "load_in_8bit" in model_spec.model_config:
-        model_args["load_in_8bit"] = model_spec.model_config["load_in_8bit"]
-    if "load_in_4bit" in model_spec.model_config:
-        model_args["load_in_4bit"] = model_spec.model_config["load_in_4bit"]
-    if 'requires_api_key' in model_spec.model_config and model_spec['model_config']['requires_api_key']:
+    if "load_in_8bit" in model_config:
+        model_args["load_in_8bit"] = model_config["load_in_8bit"]
+    if "load_in_4bit" in model_config:
+        model_args["load_in_4bit"] = model_config["load_in_4bit"]
+    if model_config.get("requires_api_key"):
         # load HF API key:
         key = KeyRegistry.from_json().get_key_for("huggingface")
         model_args["token"] = key["api_key"]
 
     hf_model_str = model_spec['huggingface_id']
-    model = AutoModelForCausalLM.from_pretrained(hf_model_str, **model_args)
+    model = _from_pretrained_with_dtype(AutoModelForCausalLM.from_pretrained, hf_model_str, **model_args)
 
-    if "peft_model" in model_spec.model_config:
-        adapter_model = model_spec.model_config["peft_model"]  # can be a path or name
+    if "peft_model" in model_config:
+        adapter_model = model_config["peft_model"]  # can be a path or name
         stdout_logger.info(f"Load PeftModel adapters from {adapter_model}")
         model = PeftModel.from_pretrained(model, adapter_model)
 
     logger.info(f"Finished loading huggingface model: {model_spec.model_name}")
-    logger.info(f"Model device map: {model.hf_device_map}")
+    device_map = getattr(model, "hf_device_map", None)
+    if device_map is None:
+        logger.info("Model device map: <not set>")
+    else:
+        logger.info(f"Model device map: {device_map}")
 
     return model
+
+
+def _from_pretrained_with_dtype(factory, *args, **kwargs):
+    """Prefer `dtype` over deprecated `torch_dtype` when supported."""
+    if "dtype" in kwargs or "torch_dtype" not in kwargs:
+        return factory(*args, **kwargs)
+
+    kwargs_with_dtype = dict(kwargs)
+    kwargs_with_dtype["dtype"] = kwargs_with_dtype.pop("torch_dtype")
+
+    try:
+        return factory(*args, **kwargs_with_dtype)
+    except TypeError:
+        return factory(*args, **kwargs)
+
+
+def _get_model_config(model_spec: backends.ModelSpec) -> Dict[str, Any]:
+    """Return model_config dict, with a fallback for legacy ModelSpec entries."""
+    model_config = getattr(model_spec, "model_config", None)
+    if model_config is None:
+        return model_spec.__dict__
+    return model_config
 
 
 class HuggingfaceLocal(backends.Backend):

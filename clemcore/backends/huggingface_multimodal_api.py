@@ -129,7 +129,11 @@ def load_model(model_spec: backends.ModelSpec):
             model.generation_config.pad_token_id = model.generation_config.eos_token_id  # Same as processor.tokenizer.pad_token_id
 
     stdout_logger.info(f"Finished loading huggingface model: {model_spec.model_name}")
-    stdout_logger.info(f"Device Map: {model.hf_device_map}")
+    device_map = getattr(model, "hf_device_map", None)
+    if device_map is None:
+        stdout_logger.info("Device Map: <not set>")
+    else:
+        stdout_logger.info(f"Device Map: {device_map}")
 
     return model
 

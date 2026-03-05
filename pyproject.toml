@@ -46,7 +46,7 @@ vllm = [
     "vllm>=0.8.4,<1.0.0" # should use transformers as installed above
 ]
 huggingface = [
-    "accelerate>=1.0.0,<2.0.0", # required for device_map="auto"
+    "accelerate>=1.2.0,<2.0.0", # required for device_map="auto"
     "bitsandbytes>=0.42.0,<1.0.0", # for loading models with 4-bit and 8-bit quantization
     "peft>=0.17.0,<1.0.0", # for loading LoRA models (adapters)
     "timm>=1.0.19,<1.1.0", # for transformers
